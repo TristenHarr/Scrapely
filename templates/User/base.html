@@ -11,7 +11,23 @@
     <script>
         $(document).ready(function(){
             $('[data-toggle="popover"]').popover();
+            $('#navnav').height($(window).height());
+            $('#overlay').hide();
         });
+
+             $(document).ready(function(){
+    $("#hide").click(function(){
+        $("#navnav").hide();
+        $("#overlay").show();
+        $('.col-sm-7, .col-sm-10').toggleClass("col-sm-7 col-sm-10");
+    });
+    $("#show").click(function(){
+        $("#navnav").show();
+         $("#overlay").hide();
+         $('.col-sm-7, .col-sm-10').toggleClass("col-sm-7 col-sm-10");
+    });
+    });
+
     </script>
     <style type="text/css">
         .hovs:hover {
@@ -22,7 +38,7 @@
 </head>
 {% from "Arrival/_formhelpers.html" import render_field %}
 <body>
-<div class="col-sm-3" style="background: aquamarine; margin: 0;">
+<div class="col-sm-3" style="background: aquamarine; margin: 0;" id="navnav">
     <div id="ProfileEdit" class="modal fade" role="dialog">
         <div class="modal-dialog">
 
@@ -45,6 +61,15 @@
 
 
     <div class="container-fluid">
+        <div class="panel-group" style="margin-top: 10%;">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h3 class="panel-title hovs" style="text-align: center;" id="hide">
+                        <span class="glyphicon glyphicon-arrow-left" aria-hidden="true" style="text-align: center;"></span>&nbsp;Hide
+                    </h3>
+                </div>
+            </div>
+        </div>
         <div class="panel-group" style="margin-top: 10%;">
             <div class="panel panel-default">
                 <div class="panel-heading">
@@ -206,7 +231,9 @@
         </div>
     </div>
 </div>
-<div class="col-sm-1" style="background-color: red; height: 1000px;"></div>
+<div class="col-sm-1" style="background-color: red; height: 1000px;"><div id="overlay">
+    <button class="btn btn-primary" id="show" style="margin-top: 10px; margin-left: 10px;">Settings</button>
+</div></div>
 <div class="col-sm-7">
     {% block body %}
     {%  endblock %}

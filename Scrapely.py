@@ -133,13 +133,13 @@ def supertable(table):
 ########################################################################################################################
 #   SUPER-TABLE
 ########################################################################################################################
-from URLS.SuperTable import _SuperTable
 
 @app.route('/datasets/SUPERTABLE/<table>/<action>', methods=['POST', "GET"])
 def SuperTable(table, action):
     sumsessioncounter()
     if login_required():
         redirect("/login")
+    from URLS.SuperTable import _SuperTable
     return _SuperTable(request, table, action)
 ########################################################################################################################
 #   Context Processors

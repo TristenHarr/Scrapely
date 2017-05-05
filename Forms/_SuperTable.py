@@ -2,17 +2,17 @@ from wtforms import Form, SelectField, StringField, RadioField, PasswordField, v
 from flask import session
 
 class DropForm(Form):
-    dropytype = RadioField("Drop By", [validators.InputRequired()],
+    droptype = RadioField("Drop By", [validators.InputRequired()],
                         choices=[('row', 'Row'),
                         ('col', "Column")])
     dropselection = StringField("Drop Index:", [validators.InputRequired()])
 
 class SwapForm(Form):
-    swaptype = RadioField("Drop By", [validators.InputRequired()],
+    swaptype = RadioField("Swap Axis:", [validators.InputRequired()],
                         choices=[('row', 'Row'),
                         ('col', "Column")])
-    swapselection1 = StringField("Item A:", [validators.InputRequired()])
-    swapselection2 = StringField("Item B:", [validators.InputRequired()])
+    swapselection1 = StringField("Item 1 Index:", [validators.InputRequired()])
+    swapselection2 = StringField("Item 2 Index:", [validators.InputRequired()])
 
 class TableForm(Form):
     table = SelectField("Table", [validators.InputRequired()],
@@ -22,7 +22,7 @@ class SaveNew(Form):
     name = StringField("New Table Name:", [validators.InputRequired()])
 
 class PushForm(Form):
-    table = PasswordField("Password", [validators.InputRequired()])
+    password = PasswordField("Password", [validators.InputRequired()])
 
 class NewRow(Form):
     datatype = RadioField("DataType", [validators.InputRequired()],

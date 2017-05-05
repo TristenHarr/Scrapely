@@ -1,6 +1,7 @@
 from Forms._SuperTable import *
-from flask import session
+from flask import session, render_template
 import sqlite3
+from Manager._TableWork import SuperTable
 
 def _SuperTable(request, table, action):
     dropform = DropForm(request.form)
@@ -10,19 +11,35 @@ def _SuperTable(request, table, action):
     pushform = PushForm(request.form)
     newrow = NewRow(request.form)
     if action == "drop" and request.method == 'POST' and dropform.validate():
-        con = sqlite3.
-    elif action == 'swap' and request.method == "POST" and swapform.validate():
-        print("DO THE SWAP HERE")
-    elif action == 'select_table' and request.method == 'POST' and tableform.validate():
-        print("DO THE SELECT HERE")
-    elif action == 'save_new' and request.method == "POST" and savenew.validate():
-        print("DO THE SAVE HERE")
-    elif action == 'push' and request.method == 'POST' and pushform.validate():
-        print("DO THE PUSH HERE")
-    elif action == 'new_row' and request.method == "POST" and newrow.validate():
-        print("DO THE NEW ROW HERE")
+        select = dropform.droptype.data
+        droptable = dropform.dropselection.data
+        print(select, droptable)
 
-    x = SuperTable('tweet', table, session['username'])
-    x.generate_functions()
-    x.main_maker()
-    return Response(x.table_starter(10)
+    elif action == 'swap' and request.method == "POST" and swapform.validate():
+        swaptype = swapform.swaptype.data
+        swap1 = swapform.swapselection1.data
+        swap2 = swapform.swapselection2.data
+        print(swaptype, swap1, swap2)
+    elif action == 'select_table' and request.method == 'POST' and tableform.validate():
+        table = tableform.table.data
+        print(table)
+    elif action == 'save_new' and request.method == "POST" and savenew.validate():
+        name = savenew.name.data
+        print(name)
+    elif action == 'push' and request.method == 'POST' and pushform.validate():
+        password = pushform.password.data
+        print(password)
+    elif action == 'new_row' and request.method == "POST" and newrow.validate():
+        datatype = newrow.datatype.data
+        rowname = newrow.rowname.data
+        backfill = newrow.backfill.data
+        print(datatype, rowname, backfill)
+    return render_template('User/SuperTable.html',
+                           dropform=dropform,
+                           swapform=swapform,
+                           tableform=tableform,
+                           savenew=savenew,
+                           pushform=pushform,
+                           newrow=newrow,
+                           table=table,
+                           superdata=SuperTable(table, session['username']).send_off())
